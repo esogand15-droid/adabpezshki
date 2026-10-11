@@ -1,0 +1,38 @@
+name: Upload tafsir booklet PDF to release
+
+on:
+  push:
+    tags:
+      - "tafsir-v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to attach the tafsir PDF to"
+        required: true
+        default: "tafsir-v1.0"
+
+permissions:
+  contents: write
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create release (if missing) and upload PDF
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="${{ github.event.inputs.tag || github.ref_name }}"
+          cp "tafsir/output/جزوه-تفسیر-موضوعی-قرآن.pdf" "HumsYar_Tafsir_Mowzui_Jozve.pdf"
+          if ! gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release create "$TAG" \
+              --repo "$GITHUB_REPOSITORY" \
+              --title "جزوهٔ تفسیر موضوعی قرآن — ویژهٔ برادران ($TAG)" \
+              --notes "جزوهٔ ۲۹ صفحه‌ای تفسیر موضوعی قرآن (سوره‌های حمد، توحید، عصر و کوثر) بر پایهٔ تفسیر نور — HumsYar. فایل PDF از بخش Assets قابل دانلود است."
+          fi
+          gh release upload "$TAG" \
+            "HumsYar_Tafsir_Mowzui_Jozve.pdf#جزوه تفسیر موضوعی قرآن — ویژه برادران (PDF)" \
+            --clobber
