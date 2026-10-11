@@ -1,4 +1,4 @@
-fpdf2>=2.8
+fpdf2==2.8.8  # 2.8.9 دچار رگرسیون BiDi است: گسست «اللّه» در cell()
 uharfbuzz
 pdfminer.six
 python-pptx

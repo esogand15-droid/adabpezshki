@@ -162,8 +162,32 @@ class Jozve(FPDF):
             self.cell(self.epw, 6, subtitle, align="R", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
         self.ln(3.5)
 
+    # --- تیتر معلق: تیتر فقط همراه اولین بلوک محتوای بعدش رسم می‌شود ---
+    _pending = None
+
     def h2(self, text, keep=0):
-        self.need(20 + keep if keep else 20)
+        self._pending = ("h2", text, keep)
+
+    def h3(self, text, keep=0):
+        self._pending = ("h3", text, keep)
+
+    def _anchor(self, first_h):
+        """پیش از رسم هر بلوک صدا زده می‌شود: اگر تیتری معلق است، جای تیتر +
+        اولین بلوک را یکجا رزرو می‌کند تا تیتر ته صفحه تنها نماند."""
+        if self._pending:
+            kind, text, keep = self._pending
+            self._pending = None
+            head_h = 20 if kind == "h2" else 14
+            self.need(min(head_h + max(keep, first_h), self.eph_avail - 6))
+            if kind == "h2":
+                self._draw_h2(text)
+            else:
+                self._draw_h3(text)
+            self.need(min(first_h, self.eph_avail - 6))
+        else:
+            self.need(min(first_h, self.eph_avail - 6))
+
+    def _draw_h2(self, text):
         self.ln(2.2)
         y = self.get_y()
         self.set_fill_color(*TEAL)
@@ -178,8 +202,7 @@ class Jozve(FPDF):
         self.line(self.l_margin, self.get_y() + 0.4, self.w - self.r_margin, self.get_y() + 0.4)
         self.ln(2.4)
 
-    def h3(self, text, keep=0):
-        self.keep(14 + keep)
+    def _draw_h3(self, text):
         self.ln(1)
         y = self.get_y()
         self.set_fill_color(*GOLD)
@@ -193,6 +216,9 @@ class Jozve(FPDF):
 
     def p(self, text, size=BODY, bold=False):
         self.set_font("Vazir", "B" if bold else "", size)
+        th = self.multi_cell(self.epw, LH, text, align="R", dry_run=True, output="HEIGHT")
+        self._anchor(min(th + 1, 34))
+        self.set_font("Vazir", "B" if bold else "", size)
         self.set_text_color(*INK)
         self.multi_cell(self.epw, LH, text, align="R", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
         self.ln(1.2)
@@ -202,7 +228,8 @@ class Jozve(FPDF):
         mw = 7.5
         h = self.multi_cell(self.epw - indent - mw, LH, text, align="R",
                             dry_run=True, output="HEIGHT")
-        self.need(h + 1)
+        self._anchor(h + 1)
+        self.set_font("Vazir", "B" if bold else "", size)
         y0 = self.get_y()
         mx = self.w - self.r_margin - indent - mw
         if marker == "●":
@@ -262,7 +289,7 @@ class Jozve(FPDF):
         h_tr = self.multi_cell(w, 5.9, translation, align="R", dry_run=True, output="HEIGHT")
         h_ref = 5.5 if ref else 0
         box_h = h_ar + h_tr + h_ref + 2 * pad + 3.5
-        self.keep(box_h + 3)
+        self._anchor(box_h + 3)
         y0 = self.get_y()
         self.set_fill_color(*CREAM)
         self.rect(self.l_margin, y0, self.epw, box_h, style="F",
@@ -297,7 +324,7 @@ class Jozve(FPDF):
         w = self.epw - 2 * pad - 4
         th = self.multi_cell(w, 6.2, text, align="R", dry_run=True, output="HEIGHT")
         box_h = th + 2 * pad + 7
-        self.keep(box_h + 3)
+        self._anchor(box_h + 3)
         y0 = self.get_y()
         self.set_fill_color(*fill)
         self.rect(self.l_margin, y0, self.epw, box_h, style="F",
@@ -339,7 +366,8 @@ class Jozve(FPDF):
         self.set_font("Vazir", "", BODY)
         hq = self.multi_cell(self.epw - 10, LH, question, align="R", dry_run=True, output="HEIGHT")
         ha = self.multi_cell(self.epw - 10, LH, answer, align="R", dry_run=True, output="HEIGHT")
-        self.keep(hq + 8)
+        # پرسش و دست‌کم بخشی از پاسخ با هم در یک صفحه بمانند
+        self._anchor(hq + min(ha, 24) + 9)
         self.bullet("پرسش: " + question, marker="؟", mcolor=PURPLE, bold=True)
         self.need(min(ha + 2, self.eph_avail - 6))
         self.bullet("پاسخ: " + answer, marker="◆", mcolor=TEAL_DARK)
@@ -358,7 +386,8 @@ class Jozve(FPDF):
         if row:
             rows.append(row)
         total_h = len(rows) * 10 + 1
-        self.keep(total_h)
+        self._anchor(total_h)
+        self.set_font("Vazir", "B", 9.5)
         y = self.get_y()
         for r in rows:
             x_right = self.w - self.r_margin
