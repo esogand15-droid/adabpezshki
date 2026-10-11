@@ -31,7 +31,9 @@ TEAL_LIGHT = (224, 242, 241)
 BLUE_LIGHT = (232, 240, 250)
 BLUE_DARK = (30, 62, 110)
 # طلایی/کرم — فقط برای بلوک آیه
-GOLD = (176, 141, 42)
+# زرد اختصاصی جزوهٔ تفسیر موضوعی قرآن (THEMATIC_QURAN_ACCENT_YELLOW)
+# نمونه‌برداری‌شده از نوار طلایی مرجع برند HumsYar — #F0AD1E
+GOLD = (240, 173, 30)
 CREAM = (251, 246, 233)
 GOLD_TEXT = (110, 84, 20)
 GRAY = (90, 98, 110)
@@ -180,7 +182,7 @@ class Jozve(FPDF):
         self.keep(14 + keep)
         self.ln(1)
         y = self.get_y()
-        self.set_fill_color(*TEAL_DARK)
+        self.set_fill_color(*GOLD)
         self.rect(self.w - self.r_margin - 3.6, y + 2.2, 3.1, 3.1, style="F",
                   round_corners=True, corner_radius=0.7)
         self.set_font("Vazir", "B", 11)
@@ -282,7 +284,7 @@ class Jozve(FPDF):
         self.multi_cell(w, 5.9, translation, align="R")
         if ref:
             self.set_font("Vazir", "B", 8)
-            self.set_text_color(*GOLD)
+            self.set_text_color(*GOLD_TEXT)
             self.set_xy(self.l_margin + pad, y0 + box_h - pad - 1.5)
             self.cell(w, 5, ref, align="L")
         self.set_y(y0 + box_h)
@@ -315,7 +317,8 @@ class Jozve(FPDF):
         self.ln(3)
 
     def note(self, text, title="نکته"):
-        self._box(text, title, TEAL_LIGHT, TEAL, TEAL_DARK)
+        # کادر نکته با سیستم رنگی زرد اختصاصی (THEMATIC_QURAN_ACCENT_YELLOW)
+        self._box(text, title, (255, 248, 229), GOLD, GOLD_TEXT)
 
     def hadith(self, text, title="حدیث"):
         self._box(text, title, BLUE_LIGHT, NAVY, BLUE_DARK)
@@ -485,7 +488,7 @@ def build():
     pdf.ln(1.5)
     guide = [
         (CREAM, GOLD, "بلوک آیه", "متن عربی آیات با قلم قرآنی (Amiri Quran) + ترجمهٔ منبع — عیناً از تفسیر نور"),
-        (TEAL_LIGHT, TEAL, "نکته", "نکته‌های تفسیری ذیل هر آیه"),
+        ((255, 248, 229), GOLD, "نکته", "نکته‌های تفسیری ذیل هر آیه"),
         (BLUE_LIGHT, NAVY, "حدیث", "روایات معصومین(ع) نقل‌شده در منبع"),
         ((236, 244, 244), TEAL_DARK, "پیام کلیدی", "جمع‌بندی و چکیدهٔ موضوع"),
         ((238, 241, 248), BLUE_DARK, "حفظی", "اعداد و فهرست‌هایی که باید به خاطر بسپاری"),
@@ -511,10 +514,11 @@ def build():
         pdf.set_y(y + 9.4)
 
     pdf.ln(2)
-    pdf.note("روش کار این جزوه: متن آیات و همهٔ نکته‌ها، حدیث‌ها و پیام‌ها عیناً از «تفسیر نور» "
-             "(منابع بارگذاری‌شده در مخزن) آمده است؛ هیچ مطلبی از حافظه یا منابع بیرونی اضافه نشده. "
-             "فهرست‌های شماره‌دار با همان تعداد و ترتیبِ منبع حفظ شده‌اند: سیمای بسم‌اللّه ۱۱ مورد، "
-             "درس‌های تربیتی حمد ۱۱ مورد، پیام‌های عصر ۱۲ مورد و پیام‌های کوثر ۲۰ مورد.",
+    pdf.note("این جزوه مجموعه‌ای از آیات، نکته‌های تفسیری، حدیث‌ها و پیام‌های آموزشی مربوط به "
+             "موضوعات مطرح‌شده در درس تفسیر موضوعی قرآن را در بر می‌گیرد. مطالب هر بخش به‌صورت منظم "
+             "دسته‌بندی شده‌اند تا مرور مفاهیم، یادآوری نکات مهم و آمادگی برای امتحان آسان‌تر شود. "
+             "هنگام مطالعه، به ارتباط آیات با نکته‌های تفسیری و پیام‌های هر درس توجه کنید و "
+             "فهرست‌های شماره‌دار را به‌ترتیب مرور کنید.",
              title="پیش از شروع")
 
     # ================= فصل‌ها =================
