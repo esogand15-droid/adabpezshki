@@ -1,0 +1,38 @@
+name: Upload sisters tafsir booklet PDF to release
+
+on:
+  push:
+    tags:
+      - "tafsir-khaharan-v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to attach the sisters' tafsir PDF to"
+        required: true
+        default: "tafsir-khaharan-v1.0"
+
+permissions:
+  contents: write
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create release (if missing) and upload PDF
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="${{ github.event.inputs.tag || github.ref_name }}"
+          cp "tafsir_kh/output/جزوه_شب_امتحانی_تفسیر_موضوعی_قرآن_خواهران.pdf" "HumsYar_Tafsir_Mowzui_Jozve_Khaharan.pdf"
+          if ! gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release create "$TAG" \
+              --repo "$GITHUB_REPOSITORY" \
+              --title "جزوهٔ شب امتحانی تفسیر موضوعی قرآن کریم — ویژهٔ خواهران ($TAG)" \
+              --notes "جزوهٔ ۳۱ صفحه‌ای شب امتحانی تفسیر موضوعی قرآن کریم ویژهٔ خواهران، بر پایهٔ کتاب «تفسیر موضوعی قرآن کریم» (جمعی از نویسندگان) — فصل‌های ۱، ۲، ۴، ۶ و ۸ در محدوده‌های اعلام‌شدهٔ آزمون — HumsYar. فایل PDF از بخش Assets قابل دانلود است."
+          fi
+          gh release upload "$TAG" \
+            "HumsYar_Tafsir_Mowzui_Jozve_Khaharan.pdf#جزوه شب امتحانی تفسیر موضوعی قرآن — ویژه خواهران (PDF)" \
+            --clobber
