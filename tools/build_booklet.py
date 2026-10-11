@@ -340,12 +340,7 @@ def build():
         lw = 104
         pdf.image(logo, x=(pdf.w - lw) / 2, y=22, w=lw)
 
-    pdf.set_y(132)
-    pdf.set_font("VazirLight", "", 12.5)
-    pdf.set_text_color(165, 185, 212)
-    pdf.cell(pdf.epw, 9, "دانشگاه علوم پزشکی هرمزگان | دانشکدهٔ پزشکی", align="C",
-             new_x=XPos.LMARGIN, new_y=YPos.NEXT)
-    pdf.ln(4)
+    pdf.set_y(136)
     pdf.set_font("VazirBlack", "", 30)
     pdf.set_text_color(*WHITE)
     pdf.cell(pdf.epw, 16, "جزوهٔ شب امتحانی", align="C", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
@@ -370,19 +365,26 @@ def build():
     ]:
         pdf.cell(pdf.epw, 8.4, "•  " + line, align="C", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
 
-    pdf.set_y(-44)
+    pdf.set_y(-46)
     pdf.set_font("Vazir", "", 10)
     pdf.set_text_color(150, 165, 185)
     pdf.cell(pdf.epw, 7, "مدرسین: دکتر الهام بوشهری · دکتر سمیره عابدینی · دکتر فرحناز کمالی",
              align="C", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
-    pdf.set_font("Vazir", "B", 10.5)
+    pdf.ln(2)
+    # برند HumsYar — دو رنگ
+    pdf.set_font("VazirBlack", "", 15)
+    hums_w = pdf.get_string_width("Hums")
+    yar_w = pdf.get_string_width("Yar")
+    x0 = (pdf.w - hums_w - yar_w) / 2
+    pdf.set_xy(x0, pdf.get_y())
+    pdf.set_text_color(*WHITE)
+    pdf.cell(hums_w, 9, "Hums")
     pdf.set_text_color(*TEAL_BRIGHT)
-    pdf.cell(pdf.epw, 8, "HumsYar | دستیار هوشمند دانشجویان پزشکی", align="C",
+    pdf.cell(yar_w, 9, "Yar", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+    pdf.set_font("Vazir", "", 9.5)
+    pdf.set_text_color(*TEAL_BRIGHT)
+    pdf.cell(pdf.epw, 7, "دستیار هوشمند دانشجویان پزشکی", align="C",
              new_x=XPos.LMARGIN, new_y=YPos.NEXT)
-    pdf.set_font("VazirLight", "", 8.5)
-    pdf.set_text_color(120, 136, 158)
-    pdf.cell(pdf.epw, 6, "خلاصهٔ کامل اسلایدها + جزوهٔ دست‌نویس کلاس + سند توانمندی‌ها | ویژهٔ مرور سریع پیش از آزمون",
-             align="C", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
 
     # ================= فهرست + اطلاعات آزمون =================
     pdf.add_page()
