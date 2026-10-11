@@ -1,0 +1,9 @@
+fpdf2>=2.8
+uharfbuzz
+pdfminer.six
+python-pptx
+olefile
+pypdf
+pillow
+pypdfium2
+fonttools
