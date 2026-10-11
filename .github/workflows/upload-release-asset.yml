@@ -1,0 +1,30 @@
+name: Upload booklet PDF to release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to attach the PDF to"
+        required: true
+        default: "v2.0"
+
+permissions:
+  contents: write
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.tag }}
+
+      - name: Upload PDF as release asset
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cp "جزوه-شب-امتحانی-آداب-پزشکی-1.pdf" "Adab-Pezeshki-1-Exam-Booklet-HumsYar.pdf"
+          gh release upload "${{ github.event.inputs.tag }}" \
+            "Adab-Pezeshki-1-Exam-Booklet-HumsYar.pdf#جزوه شب امتحانی آداب پزشکی ۱ (PDF)" \
+            --clobber
