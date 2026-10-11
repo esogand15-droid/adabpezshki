@@ -1,6 +1,9 @@
 name: Upload booklet PDF to release
 
 on:
+  push:
+    tags:
+      - "v*"
   workflow_dispatch:
     inputs:
       tag:
@@ -17,14 +20,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.inputs.tag }}
 
       - name: Upload PDF as release asset
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          TAG="${{ github.event.inputs.tag || github.ref_name }}"
           cp "جزوه-شب-امتحانی-آداب-پزشکی-1.pdf" "Adab-Pezeshki-1-Exam-Booklet-HumsYar.pdf"
-          gh release upload "${{ github.event.inputs.tag }}" \
+          gh release upload "$TAG" \
             "Adab-Pezeshki-1-Exam-Booklet-HumsYar.pdf#جزوه شب امتحانی آداب پزشکی ۱ (PDF)" \
             --clobber
