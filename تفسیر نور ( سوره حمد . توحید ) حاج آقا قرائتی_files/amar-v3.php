@@ -1,0 +1,2 @@
+
+document.write("<iframe src='https://1abzar.ir/abzar/tools/stat/stat-v3.php?color=333333&bg=F7F4D9&kc=888888&kadr=1&amar=odttbpvp7i2dj0o9ham927z52rc-3e&show=1|1|1|1|0|1|1' scrolling='no' frameborder='0' hspace='0' name='alir' align='center' width='160' height='183' style='border:1px solid #888888;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;'></iframe>");

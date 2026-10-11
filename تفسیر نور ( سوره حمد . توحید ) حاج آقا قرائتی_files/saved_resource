@@ -1,0 +1,7 @@
+function showbanner(){
+if  ( document.getElementsByTagName('body')[0]==null)
+{window.setTimeout( "showbanner()" ,2000);return; }
+dvad = document.createElement('div');dvad.setAttribute("id", '9838222');dvad.style.cssText="position:fixed;bottom:0px;left:0px;right:0px;width:728px;text-align:center;margin:0 auto;padding:0px;max-width:100%;z-index:9999;_position:absolute;_top:expression(eval(document.body.clientHeight-110px));";dvad.innerHTML="<div style=\"height:18px;width:728px;max-width:100%;line-height:13px;text-align:right;\">\r\n<a href=\"javascript:\" onclick=\"document.getElementById('9838222').style.display='none';\" style=\"background-color:#BA0F0F;color:white;width:25px;padding:5px;margin:0px;border-radius:0%;text-decoration:none;font-size:15px;font-family:Arial;\">&times;</a>\r\n</div><a href=\"https://www.blogfa.com/a/c.ashx?id=235765\"   target=\"_blank\" rel=\"nofollow\"><img  title=\"تبلیغات\" src=\"https://www.blogfa.com/b/1F50A61D2368.gif\" style=\"max-width:100% !important;width:728px;margin:0px;padding::0px;border-radius:0px;opacity:1;border:0px;\"></a>\r\n</div>";document.getElementsByTagName('body')[0].insertBefore(dvad, document.getElementsByTagName('body')[0].firstChild);
+window.setTimeout( "document.getElementById ('9838222').style.display='none" ,90000);
+}
+window.setTimeout( "showbanner()" ,2000);
