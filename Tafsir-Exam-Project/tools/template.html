@@ -130,7 +130,7 @@ footer{color:var(--muted);text-align:center;font-size:12.5px;padding:18px}
 
 <main id="main"></main>
 </div>
-<footer>HumsYar — بانک سؤال بر پایهٔ «Tafsir (2).pdf» و جزوهٔ تفسیر موضوعی قرآن (ویژهٔ برادران) · نسخهٔ ۱٫۰</footer>
+<footer>HumsYar — بانک سؤال تفسیر موضوعی قرآن · ویژهٔ برادران</footer>
 
 <script id="qdata" type="application/json">/*__DATA__*/</script>
 <script>
@@ -138,7 +138,7 @@ footer{color:var(--muted);text-align:center;font-size:12.5px;padding:18px}
 const DATA = JSON.parse(document.getElementById('qdata').textContent);
 const QS = DATA.questions;
 const byId = Object.fromEntries(QS.map(q=>[q.id,q]));
-const LSKEY='tafsir_bank_v1';
+const LSKEY='hy_quizbank_v1';
 let store = {}; try{ store = JSON.parse(localStorage.getItem(LSKEY))||{}; }catch(e){ store={}; }
 store.answers = store.answers||{};   // id -> {picked, ok}
 store.marks = store.marks||[];
@@ -212,8 +212,7 @@ function qCard(q, opts){
     <div class="row"><span class="lbl">پاسخ صحیح: </span>گزینهٔ ${q.answer}) ${correctOpt.text}</div>
     <div class="row"><span class="lbl">دلیل: </span>${q.explanation.reason}</div>
     <div class="row"><span class="lbl">نکتهٔ جزوه: </span>${q.explanation.booklet_note}</div>
-    ${q.exam_source?`<div class="row"><span class="lbl">منبع آزمون (تفسیر نور): </span>${q.exam_source.status}${q.exam_source.evidence?` — «${q.exam_source.evidence}»`:''}</div>`:''}
-    <div class="src">📖 منبع: ${q.explanation.source} · اعتبارسنجی: ${q.validation}</div>
+    <div class="src">📘 جزوهٔ تفسیر موضوعی (ویژهٔ برادران)، ص ${q.booklet_page}</div>
     <button class="retry">🔄 تمرین مجدد</button></div>`;
 
   const btns=[];
@@ -272,8 +271,7 @@ function viewSura(name){
   if(!s.count){
     const c=document.createElement('div'); c.className='card';
     c.innerHTML=`<h2 style="margin:0 0 8px;color:var(--teal2);font-size:17px">سورهٔ ${name}</h2>
-      <div class="notice">⚠️ ${s.note}<br>این وضعیت در گزارش پوشش (coverage_report.md) ثبت شده است؛ طبق قاعدهٔ پروژه،
-      هیچ سؤالی ساخته یا اضافه نشده است. برای مرور این سوره به جزوهٔ تفسیر موضوعی (ویژهٔ برادران) مراجعه کنید.</div>`;
+      <div class="notice">⚠️ ${s.note}</div>`;
     main.appendChild(c); return;
   }
   viewList(`سورهٔ ${name}`, QS.filter(q=>q.sura===name));

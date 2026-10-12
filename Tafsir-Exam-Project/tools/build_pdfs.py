@@ -18,7 +18,10 @@ GOLD_TEXT = (110, 84, 20); GRAY = (90, 98, 110); LINE = (205, 215, 220)
 INK = (30, 36, 45); GREEN = (30, 126, 52); GREEN_BG = (230, 244, 234)
 WHITE = (255, 255, 255)
 
-D = json.load(open(os.path.join(ROOT, "data", "questions.json"), encoding="utf-8"))
+import sys
+sys.path.insert(0, HERE)
+from sanitize_public import public_data
+D = public_data(json.load(open(os.path.join(ROOT, "data", "questions.json"), encoding="utf-8")))
 QS = D["questions"]
 FA = str.maketrans("0123456789", "۰۱۲۳۴۵۶۷۸۹")
 def fa(x): return str(x).translate(FA)
@@ -73,9 +76,9 @@ class PDF(FPDF):
         self.set_font("VazirL", "", 10.5); self.set_text_color(220, 228, 240)
         self.ln(4)
         self.multi_cell(0, 7.5,
-            "محدودهٔ جزوهٔ ویژهٔ برادران: سوره‌های حمد، توحید، عصر و کوثر\n"
-            "منبع سؤالات: نمونه سوالات تستی کتاب تفسیر موضوعی قرآن کریم (۲۷۰ سؤال)\n"
-            "سؤالات منطبق بر محدودهٔ جزوه: " + fa(len(QS)) + " سؤال — سورهٔ حمد",
+            "منطبق بر جزوهٔ تفسیر موضوعی قرآن — ویژهٔ برادران\n"
+            "سوره‌های حمد، توحید، عصر و کوثر\n"
+            + fa(len(QS)) + " سؤال چهارگزینه‌ای — سورهٔ حمد",
             align="C", **LM)
         self.set_y(-40); self.set_font("Vazir", "B", 13); self.set_text_color(*GOLD)
         self.cell(0, 8, "HumsYar", align="C")
@@ -120,14 +123,8 @@ class PDF(FPDF):
 
     def exp_box(self, q):
         e = q["explanation"]
-        es = q.get("exam_source") or {}
-        es_line = ""
-        if es:
-            es_line = "\nمنبع آزمون (تفسیر نور): " + es["status"]
-            if es.get("evidence"):
-                es_line += " — «" + es["evidence"] + "»"
-        text = ("دلیل: " + e["reason"] + "\nنکتهٔ جزوه: " + e["booklet_note"] + es_line +
-                "\nمنبع: " + e["source"] + " · اعتبارسنجی: " + q["validation"])
+        text = ("دلیل: " + e["reason"] + "\nنکتهٔ جزوه: " + e["booklet_note"] +
+                "\n(جزوهٔ تفسیر موضوعی — ویژهٔ برادران، ص " + str(q["booklet_page"]) + ")")
         self.set_font("Vazir", "", 8.8)
         x, w = self.l_margin, self.epw
         n = self.lines_of(w - 9, 5.6, text)
@@ -152,11 +149,8 @@ class PDF(FPDF):
         if with_answer:
             e = q["explanation"]
             self.set_font("Vazir", "", 8.8)
-            es = q.get("exam_source") or {}
-            es_line = ("\nمنبع آزمون: " + es.get("status", "") + " " + es.get("evidence", "")) if es else ""
             est += self.lines_of(qw - 9, 5.6,
-                "دلیل: " + e["reason"] + "\nنکتهٔ جزوه: " + e["booklet_note"] + es_line +
-                "\nمنبع: " + e["source"]) * 5.6 + 14
+                "دلیل: " + e["reason"] + "\nنکتهٔ جزوه: " + e["booklet_note"]) * 5.6 + 14
         self.need(min(est + 6, 230))
 
         # سربرگ سؤال: شماره (راست) + برچسب‌ها (چپ)
@@ -200,18 +194,14 @@ class PDF(FPDF):
 def intro(pdf, practice=False):
     pdf.add_page()
     pdf.h1("دربارهٔ این مجموعه")
-    m = D["meta"]; c = m["counts"]
     pdf.para(
-        "این مجموعه حاصل بررسی تک‌تک " + fa(c["source_total"]) + " سؤال فایل «Tafsir (2).pdf» و تطبیق آن‌ها با "
-        "جزوهٔ تفسیر موضوعی قرآن (ویژهٔ برادران — محدودهٔ سوره‌های حمد، توحید، عصر و کوثر) است. "
-        "از کل سؤالات منبع، " + fa(c["accepted"]) + " سؤال (درس نهم — سورهٔ حمد) در محدودهٔ جزوه قرار داشت: "
-        + fa(c["accepted_A"]) + " سؤال «قطعی» (A؛ مستند مستقیم به جزوه) و " + fa(c["accepted_B"]) +
-        " سؤال «مفهومی» (B؛ مرتبط با سورهٔ حمد با تکیه بر پاسخنامهٔ منبع). " + fa(c["excluded_C"]) +
-        " سؤال دیگر به فصل‌های کتاب تفسیر موضوعی قرآن کریم مربوط بود و خارج از محدودهٔ جزوه است "
-        "(فهرست کامل در excluded_questions.csv).")
+        "این مجموعه شامل " + fa(len(QS)) + " سؤال چهارگزینه‌ای از سورهٔ حمد است که مطابق ساختار جزوهٔ "
+        "تفسیر موضوعی قرآن (ویژهٔ برادران) مبحث‌بندی شده و پاسخ هر سؤال همراه با دلیل و نکتهٔ جزوه "
+        "(با ذکر صفحه) آمده است. سؤالات در دو دسته ارائه می‌شوند: «قطعی A» (مستند مستقیم به متن جزوه) "
+        "و «مفهومی B» (مرتبط با مباحث سوره برای تسلط عمیق‌تر).")
     pdf.ln(2)
-    pdf.note_box("در منبع سؤالات، هیچ سؤالی دربارهٔ سوره‌های توحید، عصر و کوثر وجود ندارد؛ طبق قاعدهٔ "
-                 "پروژه هیچ سؤالی ساخته نشده است. برای این سه سوره به خود جزوه مراجعه کنید.",
+    pdf.note_box("این مجموعه فعلاً فقط سؤالات سورهٔ حمد را دربر دارد؛ برای مرور سوره‌های توحید، عصر و "
+                 "کوثر به جزوهٔ تفسیر موضوعی (ویژهٔ برادران) مراجعه کنید.",
                  title="پوشش سوره‌ها")
     if practice:
         pdf.note_box("این نسخهٔ تمرینی بدون پاسخ است؛ کلید همهٔ سؤالات در جدول پایانی آمده است.",
@@ -265,9 +255,8 @@ def build_practice():
             pdf.set_text_color(*INK)
             pdf.cell(rw, rh, "سؤال " + fa(i + 1) + ":  گزینهٔ " + q["answer"], align="C", border=1)
     pdf.set_y(y0 + per * rh + 6)
-    pdf.note_box("کلیدها مطابق پاسخنامهٔ منبع (Tafsir (2).pdf) و پس از تطبیق با جزوهٔ برادران است. "
-                 "توضیح تشریحی هر سؤال در «Tafsir_Mozooei_Brothers_Question_Bank.pdf» آمده است.",
-                 title="یادآوری")
+    pdf.note_box("توضیح تشریحی هر سؤال (دلیل + نکتهٔ جزوه با ذکر صفحه) در نسخهٔ کامل بانک سؤالات "
+                 "آمده است.", title="یادآوری")
     out = os.path.join(ROOT, "pdf", "Tafsir_Practice_Without_Answers.pdf")
     pdf.output(out); print(out, pdf.page_no(), "pages")
 
