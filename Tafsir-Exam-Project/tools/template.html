@@ -210,9 +210,7 @@ function qCard(q, opts){
   const correctOpt=q.options.find(o=>o.key===q.answer);
   expl.innerHTML=`<div class="head"></div><div class="body">
     <div class="row"><span class="lbl">پاسخ صحیح: </span>گزینهٔ ${q.answer}) ${correctOpt.text}</div>
-    <div class="row"><span class="lbl">دلیل: </span>${q.explanation.reason}</div>
-    <div class="row"><span class="lbl">نکتهٔ جزوه: </span>${q.explanation.booklet_note}</div>
-    <div class="src">📘 جزوهٔ تفسیر موضوعی (ویژهٔ برادران)، ص ${q.booklet_page}</div>
+    <div class="row">${q.explanation.text}</div>
     <button class="retry">🔄 تمرین مجدد</button></div>`;
 
   const btns=[];

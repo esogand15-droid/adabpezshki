@@ -122,9 +122,7 @@ class PDF(FPDF):
         self.set_y(y + h + 3)
 
     def exp_box(self, q):
-        e = q["explanation"]
-        text = ("دلیل: " + e["reason"] + "\nنکتهٔ جزوه: " + e["booklet_note"] +
-                "\n(جزوهٔ تفسیر موضوعی — ویژهٔ برادران، ص " + str(q["booklet_page"]) + ")")
+        text = q["explanation"]["text"]
         self.set_font("Vazir", "", 8.8)
         x, w = self.l_margin, self.epw
         n = self.lines_of(w - 9, 5.6, text)
@@ -147,10 +145,8 @@ class PDF(FPDF):
         for o in q["options"]:
             est += self.lines_of(qw - 14, 6.2, o["key"] + ") " + o["text"]) * 6.2 + 1.2
         if with_answer:
-            e = q["explanation"]
             self.set_font("Vazir", "", 8.8)
-            est += self.lines_of(qw - 9, 5.6,
-                "دلیل: " + e["reason"] + "\nنکتهٔ جزوه: " + e["booklet_note"]) * 5.6 + 14
+            est += self.lines_of(qw - 9, 5.6, q["explanation"]["text"]) * 5.6 + 12
         self.need(min(est + 6, 230))
 
         # سربرگ سؤال: شماره (راست) + برچسب‌ها (چپ)
@@ -196,9 +192,9 @@ def intro(pdf, practice=False):
     pdf.h1("دربارهٔ این مجموعه")
     pdf.para(
         "این مجموعه شامل " + fa(len(QS)) + " سؤال چهارگزینه‌ای از سورهٔ حمد است که مطابق ساختار جزوهٔ "
-        "تفسیر موضوعی قرآن (ویژهٔ برادران) مبحث‌بندی شده و پاسخ هر سؤال همراه با دلیل و نکتهٔ جزوه "
-        "(با ذکر صفحه) آمده است. سؤالات در دو دسته ارائه می‌شوند: «قطعی A» (مستند مستقیم به متن جزوه) "
-        "و «مفهومی B» (مرتبط با مباحث سوره برای تسلط عمیق‌تر).")
+        "تفسیر موضوعی قرآن (ویژهٔ برادران) مبحث‌بندی شده و پاسخ هر سؤال همراه با توضیح کوتاه آمده است. "
+        "سؤالات در دو دسته ارائه می‌شوند: «قطعی A» (نکات اصلی و مستقیم جزوه) و «مفهومی B» "
+        "(مرتبط با مباحث سوره برای تسلط عمیق‌تر).")
     pdf.ln(2)
     pdf.note_box("این مجموعه فعلاً فقط سؤالات سورهٔ حمد را دربر دارد؛ برای مرور سوره‌های توحید، عصر و "
                  "کوثر به جزوهٔ تفسیر موضوعی (ویژهٔ برادران) مراجعه کنید.",
@@ -255,8 +251,7 @@ def build_practice():
             pdf.set_text_color(*INK)
             pdf.cell(rw, rh, "سؤال " + fa(i + 1) + ":  گزینهٔ " + q["answer"], align="C", border=1)
     pdf.set_y(y0 + per * rh + 6)
-    pdf.note_box("توضیح تشریحی هر سؤال (دلیل + نکتهٔ جزوه با ذکر صفحه) در نسخهٔ کامل بانک سؤالات "
-                 "آمده است.", title="یادآوری")
+    pdf.note_box("توضیح کوتاه هر سؤال در نسخهٔ کامل بانک سؤالات آمده است.", title="یادآوری")
     out = os.path.join(ROOT, "pdf", "Tafsir_Practice_Without_Answers.pdf")
     pdf.output(out); print(out, pdf.page_no(), "pages")
 
