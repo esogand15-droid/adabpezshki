@@ -212,6 +212,7 @@ function qCard(q, opts){
     <div class="row"><span class="lbl">پاسخ صحیح: </span>گزینهٔ ${q.answer}) ${correctOpt.text}</div>
     <div class="row"><span class="lbl">دلیل: </span>${q.explanation.reason}</div>
     <div class="row"><span class="lbl">نکتهٔ جزوه: </span>${q.explanation.booklet_note}</div>
+    ${q.exam_source?`<div class="row"><span class="lbl">منبع آزمون (تفسیر نور): </span>${q.exam_source.status}${q.exam_source.evidence?` — «${q.exam_source.evidence}»`:''}</div>`:''}
     <div class="src">📖 منبع: ${q.explanation.source} · اعتبارسنجی: ${q.validation}</div>
     <button class="retry">🔄 تمرین مجدد</button></div>`;
 

@@ -120,7 +120,13 @@ class PDF(FPDF):
 
     def exp_box(self, q):
         e = q["explanation"]
-        text = ("دلیل: " + e["reason"] + "\nنکتهٔ جزوه: " + e["booklet_note"] +
+        es = q.get("exam_source") or {}
+        es_line = ""
+        if es:
+            es_line = "\nمنبع آزمون (تفسیر نور): " + es["status"]
+            if es.get("evidence"):
+                es_line += " — «" + es["evidence"] + "»"
+        text = ("دلیل: " + e["reason"] + "\nنکتهٔ جزوه: " + e["booklet_note"] + es_line +
                 "\nمنبع: " + e["source"] + " · اعتبارسنجی: " + q["validation"])
         self.set_font("Vazir", "", 8.8)
         x, w = self.l_margin, self.epw
@@ -146,8 +152,10 @@ class PDF(FPDF):
         if with_answer:
             e = q["explanation"]
             self.set_font("Vazir", "", 8.8)
+            es = q.get("exam_source") or {}
+            es_line = ("\nمنبع آزمون: " + es.get("status", "") + " " + es.get("evidence", "")) if es else ""
             est += self.lines_of(qw - 9, 5.6,
-                "دلیل: " + e["reason"] + "\nنکتهٔ جزوه: " + e["booklet_note"] +
+                "دلیل: " + e["reason"] + "\nنکتهٔ جزوه: " + e["booklet_note"] + es_line +
                 "\nمنبع: " + e["source"]) * 5.6 + 14
         self.need(min(est + 6, 230))
 

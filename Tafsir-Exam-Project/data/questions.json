@@ -14,8 +14,8 @@
   "counts": {
    "source_total": 270,
    "accepted": 30,
-   "accepted_A": 21,
-   "accepted_B": 9,
+   "accepted_A": 22,
+   "accepted_B": 8,
    "excluded_C": 240,
    "duplicates": 0,
    "fabricated": 0
@@ -79,7 +79,11 @@
    "source_qnum": 1,
    "source_page": 66,
    "validation": "پاسخنامهٔ منبع (در جزوه تصریح نشده)",
-   "review_flag": false
+   "review_flag": false,
+   "exam_source": {
+    "status": "در منابع آزمون یافت نشد — مستند به پاسخنامهٔ منبع سؤالات",
+    "evidence": ""
+   }
   },
   {
    "id": "HMD-02",
@@ -116,7 +120,11 @@
    "source_qnum": 2,
    "source_page": 66,
    "validation": "جزوه + پاسخنامهٔ منبع",
-   "review_flag": false
+   "review_flag": false,
+   "exam_source": {
+    "status": "تأیید مستقیم — متن پشتیبان عیناً در منبع آزمون موجود است",
+    "evidence": "به نقل ابن‌عباس، سورهٔ حمد اساس قرآن است؛ بهترین سورهٔ قرآن است"
+   }
   },
   {
    "id": "HMD-03",
@@ -153,7 +161,11 @@
    "source_qnum": 3,
    "source_page": 66,
    "validation": "جزوه + پاسخنامهٔ منبع",
-   "review_flag": false
+   "review_flag": false,
+   "exam_source": {
+    "status": "تأیید مفهومی — مضمون در منبع آزمون هست، تعبیر سؤال عیناً نیامده",
+    "evidence": "آیات سورهٔ فاتحه اشاراتی دربارهٔ خداوند و صفات او، مسئلهٔ معاد و… دارد (تعبیر «نخستین سخن» عیناً نیامده)"
+   }
   },
   {
    "id": "HMD-04",
@@ -190,7 +202,11 @@
    "source_qnum": 4,
    "source_page": 66,
    "validation": "جزوه + پاسخنامهٔ منبع",
-   "review_flag": false
+   "review_flag": false,
+   "exam_source": {
+    "status": "تأیید مستقیم — متن پشتیبان عیناً در منبع آزمون موجود است",
+    "evidence": "خداوند متعال از جهات مختلف قابل عبادت است و ما باید حمد و سپاس او را به‌جا آوریم"
+   }
   },
   {
    "id": "HMD-05",
@@ -227,7 +243,11 @@
    "source_qnum": 5,
    "source_page": 67,
    "validation": "پاسخنامهٔ منبع + تطبیق بخشی با جزوه",
-   "review_flag": false
+   "review_flag": false,
+   "exam_source": {
+    "status": "در منابع آزمون یافت نشد — مستند به پاسخنامهٔ منبع سؤالات",
+    "evidence": ""
+   }
   },
   {
    "id": "HMD-06",
@@ -264,7 +284,11 @@
    "source_qnum": 6,
    "source_page": 67,
    "validation": "جزوه + پاسخنامهٔ منبع",
-   "review_flag": false
+   "review_flag": false,
+   "exam_source": {
+    "status": "تأیید مستقیم — متن پشتیبان عیناً در منبع آزمون موجود است",
+    "evidence": "این سوره کلام خدای سبحان است اما به نیابت از طرف بنده‌اش… در قرآن هیچ سوره‌ای نظیر آن نیست (المیزان)"
+   }
   },
   {
    "id": "HMD-07",
@@ -301,7 +325,11 @@
    "source_qnum": 7,
    "source_page": 67,
    "validation": "جزوه + پاسخنامهٔ منبع",
-   "review_flag": false
+   "review_flag": false,
+   "exam_source": {
+    "status": "تأیید مستقیم — متن پشتیبان عیناً در منبع آزمون موجود است",
+    "evidence": "مراحل پرواز معنوی عبارت است از: ثنا، ارتباط و سپس دعا؛ اول سورهٔ حمد ثناست"
+   }
   },
   {
    "id": "HMD-08",
@@ -338,7 +366,11 @@
    "source_qnum": 8,
    "source_page": 67,
    "validation": "جزوه + پاسخنامهٔ منبع",
-   "review_flag": false
+   "review_flag": false,
+   "exam_source": {
+    "status": "تأیید مستقیم — متن پشتیبان عیناً در منبع آزمون موجود است",
+    "evidence": "من سورهٔ حمد را میان خود و بنده‌ام تقسیم کرده‌ام؛ نیمی برای من و نیمی برای بندهٔ من است"
+   }
   },
   {
    "id": "HMD-09",
@@ -375,7 +407,11 @@
    "source_qnum": 9,
    "source_page": 68,
    "validation": "جزوه + پاسخنامهٔ منبع",
-   "review_flag": false
+   "review_flag": false,
+   "exam_source": {
+    "status": "تأیید مستقیم — متن پشتیبان عیناً در منبع آزمون موجود است",
+    "evidence": "سَرَقوا اکرمَ آیة — بهترین آیهٔ قرآن را به سرقت بردند"
+   }
   },
   {
    "id": "HMD-10",
@@ -412,7 +448,11 @@
    "source_qnum": 10,
    "source_page": 68,
    "validation": "جزوه + پاسخنامهٔ منبع",
-   "review_flag": false
+   "review_flag": false,
+   "exam_source": {
+    "status": "تأیید مستقیم — متن پشتیبان عیناً در منبع آزمون موجود است",
+    "evidence": "تنها در آغاز سورهٔ برائت (توبه) بسم‌اللّه نیامده است"
+   }
   },
   {
    "id": "HMD-11",
@@ -449,7 +489,11 @@
    "source_qnum": 11,
    "source_page": 68,
    "validation": "جزوه + پاسخنامهٔ منبع",
-   "review_flag": false
+   "review_flag": false,
+   "exam_source": {
+    "status": "تأیید مستقیم — متن پشتیبان عیناً در منبع آزمون موجود است",
+    "evidence": "رسالت پیامبر اکرم(ص) نیز با نام او آغاز گردید: اقرأ باسم ربک"
+   }
   },
   {
    "id": "HMD-12",
@@ -486,7 +530,11 @@
    "source_qnum": 12,
    "source_page": 68,
    "validation": "جزوه + پاسخنامهٔ منبع",
-   "review_flag": false
+   "review_flag": false,
+   "exam_source": {
+    "status": "تأیید مستقیم — متن پشتیبان عیناً در منبع آزمون موجود است",
+    "evidence": "بسم‌اللّه در آغاز سوره رمز آن است که مطالب سوره از مبدأ حق و مظهر رحمت نازل شده"
+   }
   },
   {
    "id": "HMD-13",
@@ -523,7 +571,11 @@
    "source_qnum": 13,
    "source_page": 69,
    "validation": "جزوه + پاسخنامهٔ منبع",
-   "review_flag": false
+   "review_flag": false,
+   "exam_source": {
+    "status": "تأیید مستقیم — متن پشتیبان عیناً در منبع آزمون موجود است",
+    "evidence": "حمد برای کارهای غیر اجباری است"
+   }
   },
   {
    "id": "HMD-14",
@@ -560,7 +612,11 @@
    "source_qnum": 14,
    "source_page": 69,
    "validation": "جزوه + پاسخنامهٔ منبع",
-   "review_flag": false
+   "review_flag": false,
+   "exam_source": {
+    "status": "تأیید مستقیم — متن پشتیبان عیناً در منبع آزمون موجود است",
+    "evidence": "الف و لام به معنای تمام حمد و جنس ستایش است"
+   }
   },
   {
    "id": "HMD-15",
@@ -597,7 +653,11 @@
    "source_qnum": 15,
    "source_page": 69,
    "validation": "پاسخنامهٔ منبع (در جزوه تصریح نشده)",
-   "review_flag": true
+   "review_flag": true,
+   "exam_source": {
+    "status": "در منابع آزمون یافت نشد — مستند به پاسخنامهٔ منبع سؤالات",
+    "evidence": ""
+   }
   },
   {
    "id": "HMD-16",
@@ -634,7 +694,11 @@
    "source_qnum": 16,
    "source_page": 69,
    "validation": "جزوه + پاسخنامهٔ منبع",
-   "review_flag": false
+   "review_flag": false,
+   "exam_source": {
+    "status": "تأیید مستقیم — متن پشتیبان عیناً در منبع آزمون موجود است",
+    "evidence": "دلیل ستایش ما، پروردگاری اوست: الحمدللّه ربّ العالمین"
+   }
   },
   {
    "id": "HMD-17",
@@ -671,7 +735,11 @@
    "source_qnum": 17,
    "source_page": 70,
    "validation": "جزوه + پاسخنامهٔ منبع",
-   "review_flag": false
+   "review_flag": false,
+   "exam_source": {
+    "status": "تأیید مستقیم — متن پشتیبان عیناً در منبع آزمون موجود است",
+    "evidence": "یوم الدین در قرآن به معنای روز قیامت است که روز کیفر و پاداش می‌باشد"
+   }
   },
   {
    "id": "HMD-18",
@@ -708,7 +776,11 @@
    "source_qnum": 18,
    "source_page": 70,
    "validation": "جزوه + پاسخنامهٔ منبع",
-   "review_flag": false
+   "review_flag": false,
+   "exam_source": {
+    "status": "تأیید مستقیم — متن پشتیبان عیناً در منبع آزمون موجود است",
+    "evidence": "قیامت، پرتوی از ربوبیت اوست"
+   }
   },
   {
    "id": "HMD-19",
@@ -745,7 +817,11 @@
    "source_qnum": 19,
    "source_page": 70,
    "validation": "جزوه + پاسخنامهٔ منبع",
-   "review_flag": false
+   "review_flag": false,
+   "exam_source": {
+    "status": "تأیید مستقیم — متن پشتیبان عیناً در منبع آزمون موجود است",
+    "evidence": "حدیث قدسی: بنده‌ام راست می‌گوید که تنها مرا پرستش می‌کند… تنها از من یاری خواسته"
+   }
   },
   {
    "id": "HMD-20",
@@ -782,7 +858,11 @@
    "source_qnum": 20,
    "source_page": 70,
    "validation": "جزوه + پاسخنامهٔ منبع",
-   "review_flag": false
+   "review_flag": false,
+   "exam_source": {
+    "status": "تأیید مستقیم — متن پشتیبان عیناً در منبع آزمون موجود است",
+    "evidence": "خداوند دین پابرجا و استوار خود را راه مستقیم معرفی می‌کند: قل انّنی هدانی ربی الی صراطٍ مستقیم"
+   }
   },
   {
    "id": "HMD-21",
@@ -819,7 +899,11 @@
    "source_qnum": 21,
    "source_page": 71,
    "validation": "پاسخنامهٔ منبع + هم‌سو با جزوه",
-   "review_flag": false
+   "review_flag": false,
+   "exam_source": {
+    "status": "تأیید مفهومی — مضمون در منبع آزمون هست، تعبیر سؤال عیناً نیامده",
+    "evidence": "امامان معصوم فرمودند: راه مستقیم ما هستیم — نمونهٔ عینی راه مستقیم (تعبیر «بهترین مصداق = آخرین آیه» عیناً نیامده)"
+   }
   },
   {
    "id": "HMD-22",
@@ -856,7 +940,11 @@
    "source_qnum": 22,
    "source_page": 71,
    "validation": "جزوه + پاسخنامهٔ منبع",
-   "review_flag": false
+   "review_flag": false,
+   "exam_source": {
+    "status": "تأیید مستقیم — متن پشتیبان عیناً در منبع آزمون موجود است",
+    "evidence": "قرآن مردم را به سه دسته تقسیم می‌نماید: نعمت‌یافتگان ثابت‌قدم، غضب‌شدگان و گمراهان"
+   }
   },
   {
    "id": "HMD-23",
@@ -893,7 +981,11 @@
    "source_qnum": 23,
    "source_page": 71,
    "validation": "جزوه + پاسخنامهٔ منبع",
-   "review_flag": false
+   "review_flag": false,
+   "exam_source": {
+    "status": "تأیید مستقیم — متن پشتیبان عیناً در منبع آزمون موجود است",
+    "evidence": "درخواست هدایت به راه مستقیم، مهم‌ترین خواستهٔ یکتاپرستان است"
+   }
   },
   {
    "id": "HMD-24",
@@ -930,12 +1022,16 @@
    "source_qnum": 24,
    "source_page": 71,
    "validation": "پاسخنامهٔ منبع (در جزوه تصریح نشده)",
-   "review_flag": true
+   "review_flag": true,
+   "exam_source": {
+    "status": "در منابع آزمون یافت نشد — مستند به پاسخنامهٔ منبع سؤالات",
+    "evidence": ""
+   }
   },
   {
    "id": "HMD-25",
    "sura": "حمد",
-   "category": "B",
+   "category": "A",
    "topic": "صراط الذین انعمت علیهم (آیهٔ ۷)",
    "difficulty": "متوسط",
    "question": "گروه «المغضوب علیهم» چه کسانی هستند؟",
@@ -960,14 +1056,18 @@
    "answer": "د",
    "explanation": {
     "reason": "مغضوبان کسانی‌اند که از سر کفر، لجاجت و دشمنی با حق، دچار قهر و غضب الهی شده‌اند.",
-    "booklet_note": "جزوه: «قرآن افرادی مانند فرعون، قارون و ابولهب و امت‌هایی همچون قوم عاد، ثمود و بنی‌اسرائیل را غضب‌شده معرفی می‌کند» — به سبب تحریف آیات، رباخواری و فرار از جهاد.",
+    "booklet_note": "جزوه: «قرآن افرادی مانند فرعون، قارون و ابولهب و امت‌هایی همچون قوم عاد، ثمود و بنی‌اسرائیل را غضب‌شده معرفی می‌کند» — به سبب تحریف آیات، رباخواری و فرار از جهاد. منبع آزمون (تفسیر نور): «بنی‌اسرائیل مورد نعمت قرار گرفتند ولی در اثر ناسپاسی و لجاجت گرفتار غضب شدند.»",
     "source": "Tafsir (2).pdf — درس نهم، سؤال 25، ص 72 — جزوهٔ تفسیر موضوعی قرآن (ویژهٔ برادران)، ص ۱۲"
    },
    "booklet_page": "۱۲",
    "source_qnum": 25,
    "source_page": 72,
-   "validation": "پاسخنامهٔ منبع + هم‌سو با جزوه",
-   "review_flag": false
+   "validation": "جزوه + منبع آزمون + پاسخنامهٔ منبع",
+   "review_flag": false,
+   "exam_source": {
+    "status": "تأیید مستقیم — متن پشتیبان عیناً در منبع آزمون موجود است",
+    "evidence": "بنی‌اسرائیل در اثر ناسپاسی و لجاجت گرفتار غضب شدند؛ فرعون و قارون و ابولهب… غضب‌شدگان"
+   }
   },
   {
    "id": "HMD-26",
@@ -1004,7 +1104,11 @@
    "source_qnum": 26,
    "source_page": 72,
    "validation": "پاسخنامهٔ منبع (در جزوه تصریح نشده)",
-   "review_flag": true
+   "review_flag": true,
+   "exam_source": {
+    "status": "تأیید مفهومی — مضمون در منبع آزمون هست، تعبیر سؤال عیناً نیامده",
+    "evidence": "مراد از نعمت در «انعمت علیهم» نعمتِ هدایت است (معنای لغوی «آسایش» در منبع آزمون نیامده؛ کلید صرفاً از پاسخنامه)"
+   }
   },
   {
    "id": "HMD-27",
@@ -1041,7 +1145,11 @@
    "source_qnum": 27,
    "source_page": 72,
    "validation": "پاسخنامهٔ منبع (در جزوه تصریح نشده)",
-   "review_flag": true
+   "review_flag": true,
+   "exam_source": {
+    "status": "در منابع آزمون یافت نشد — مستند به پاسخنامهٔ منبع سؤالات",
+    "evidence": ""
+   }
   },
   {
    "id": "HMD-28",
@@ -1078,7 +1186,11 @@
    "source_qnum": 28,
    "source_page": 72,
    "validation": "جزوه + پاسخنامهٔ منبع",
-   "review_flag": false
+   "review_flag": false,
+   "exam_source": {
+    "status": "تأیید مستقیم — متن پشتیبان عیناً در منبع آزمون موجود است",
+    "evidence": "رحمت او بر همه چیز سایه گسترده است: و رحمتی وسعت کلّ شیء"
+   }
   },
   {
    "id": "HMD-29",
@@ -1115,7 +1227,11 @@
    "source_qnum": 29,
    "source_page": 73,
    "validation": "جزوه + پاسخنامهٔ منبع",
-   "review_flag": false
+   "review_flag": false,
+   "exam_source": {
+    "status": "تأیید مستقیم — متن پشتیبان عیناً در منبع آزمون موجود است",
+    "evidence": "مالکیت خداوند حقیقی است و شامل احاطه و سلطنت است"
+   }
   },
   {
    "id": "HMD-30",
@@ -1152,7 +1268,11 @@
    "source_qnum": 30,
    "source_page": 73,
    "validation": "جزوه + پاسخنامهٔ منبع",
-   "review_flag": false
+   "review_flag": false,
+   "exam_source": {
+    "status": "تأیید مستقیم — متن پشتیبان عیناً در منبع آزمون موجود است",
+    "evidence": "ربّنا الذی اعطی کلّ شیء خلقه ثم هدی — بیانگر هدایت تکوینی است"
+   }
   }
  ]
 }
