@@ -1,0 +1,40 @@
+name: Upload osool khadamat booklet to release
+
+on:
+  push:
+    tags:
+      - "osool-v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to attach the osool booklet to"
+        required: true
+        default: "osool-v1.0"
+
+permissions:
+  contents: write
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create release (if missing) and upload files
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="${{ github.event.inputs.tag || github.ref_name }}"
+          cp "osool/output/جزوه-شب-امتحانی-اصول-خدمات-سلامت.pdf" "HumsYar_Osool_Khadamat_Jozve.pdf"
+          cp "osool/output/جزوه-شب-امتحانی-اصول-خدمات-سلامت.docx" "HumsYar_Osool_Khadamat_Jozve.docx"
+          if ! gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release create "$TAG" \
+              --repo "$GITHUB_REPOSITORY" \
+              --title "جزوهٔ شب امتحانی اصول خدمات سلامت ($TAG)" \
+              --notes "جزوهٔ ۶۱ صفحه‌ای ایمن‌سازی و واکسیناسیون کشوری بر پایهٔ «برنامه و راهنمای ایمن‌سازی ۱۴۰۳» — HumsYar. فایل PDF (نسخهٔ مرجع) و DOCX (نسخهٔ قابل‌ویرایش) از بخش Assets قابل دانلود است."
+          fi
+          gh release upload "$TAG" \
+            "HumsYar_Osool_Khadamat_Jozve.pdf#جزوه شب امتحانی اصول خدمات سلامت (PDF)" \
+            "HumsYar_Osool_Khadamat_Jozve.docx#نسخه قابل ویرایش (DOCX)" \
+            --clobber
