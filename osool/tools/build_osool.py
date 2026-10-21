@@ -342,6 +342,38 @@ class Jozve(FPDF):
     def define(self, text, title="تعریف"):
         self._box(text, title, BLUE_LIGHT, TEAL, BLUE_DARK)
 
+    def chapter_summary(self, text):
+        # فقط ذخیره می‌شود؛ رندر در quick_review تا هر دو کادر یک‌جا بمانند
+        self._summary_text = text
+
+    def quick_review(self, items):
+        label = CH_DIGITS[self.chapter_no - 1]
+        summary = getattr(self, "_summary_text", None)
+        # برآورد ارتفاع جمع‌بندی
+        total = 0.0
+        if summary:
+            self.set_font("Vazir", "", 9.8)
+            w = self.epw - 2 * 4 - 4
+            th = self.multi_cell(w, 6.2, summary, align="R", dry_run=True,
+                                 output="HEIGHT")
+            total += th + 2 * 4 + 7 + 3
+        # برآورد ارتفاع ردیف‌های مرور سریع
+        self.set_font("Vazir", "B", 9.5)
+        rows, x_used = 1, 0.0
+        for it in items:
+            tw = self.get_string_width(it) + 7
+            if x_used + tw > self.epw and x_used > 0:
+                rows += 1
+                x_used = 0.0
+            x_used += tw + 2.5
+        total += 14 + rows * 10 + 1
+        self.keep(total + 6)
+        if summary:
+            self._box(summary, "جمع‌بندی فصل " + label, TEAL_LIGHT, TEAL, TEAL_DARK)
+            self._summary_text = None
+        self.h2("مرور سریع فصل " + label)
+        self.tag_line(items)
+
     def qa(self, question, answer):
         self.set_font("Vazir", "", BODY)
         hq = self.multi_cell(self.epw - 10, LH, question, align="R", dry_run=True, output="HEIGHT")
@@ -602,10 +634,11 @@ def build():
         pdf.set_y(y + 9.4)
 
     pdf.ln(2)
-    pdf.note("این جزوه تمام فصل‌های «برنامه و راهنمای ایمن‌سازی ۱۴۰۳» را به ترتیب خود منبع پوشش می‌دهد: "
-             "متن‌ها، جدول‌ها، اعداد و استثناها از همان منبع بازنویسی و فشرده شده‌اند و شمارهٔ جدول‌های منبع "
-             "(جدول ۱ تا ۲۴) کنار هر جدول آمده است تا در صورت نیاز بتوانی به اصل آن مراجعه کنی. "
-             "جعبه‌های رنگی فقط ابزار مرور سریع‌اند؛ متن اصلی هر مبحث را هم حتماً یک‌بار بخوان.",
+    pdf.note("ترتیب فصل‌ها همان ترتیب کتاب «برنامه و راهنمای ایمن‌سازی ۱۴۰۳» است و شمارهٔ جدول‌ها "
+             "(۱ تا ۲۴) هم عیناً از خود کتاب آمده؛ هر جا شک کردی، با همین شماره سراغ اصل منبع برو. "
+             "علامت ٭ کنار بعضی خانه‌های جدول یعنی توضیحش را زیر همان جدول نوشته‌ایم. "
+             "آخر هر فصل هم یک «جمع‌بندی» و یک «مرور سریع» گذاشته‌ایم برای دورهٔ آخرِ شب — ولی این‌ها "
+             "جای متن را نمی‌گیرند؛ هر مبحث را اول یک‌بار کامل بخوان، بعد با کادرها و مرورها جلو بیا.",
              title="پیش از شروع")
 
     # ================= فصل‌ها =================

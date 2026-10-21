@@ -189,6 +189,13 @@ class DocxJozve:
     def define(self, text, title="تعریف"):
         self._box(text, title)
 
+    def chapter_summary(self, text):
+        self._box(text, f"جمع‌بندی فصل {_clean(str(self._ch))}")
+
+    def quick_review(self, items):
+        self.h2(f"مرور سریع فصل {_clean(str(self._ch))}")
+        self._par("  |  ".join(items), size=10, bold=True, color=TEAL, space_after=8)
+
     def qa(self, question, answer):
         self._par("سؤال: " + question, size=10.5, bold=True, color=NAVY, space_after=1)
         self._par("پاسخ: " + answer, size=10.5, space_after=6)
@@ -286,7 +293,11 @@ def main():
         par.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
     j._box("این سند، نسخهٔ قابل‌ویرایش جزوه است؛ نسخهٔ مرجعِ صفحه‌آرایی‌شده، فایل PDF همراه آن است. "
-           "جعبه‌های رنگی PDF در اینجا به صورت پاراگراف‌های قاب‌دار با برچسب «نوع جعبه» آمده‌اند.",
+           "ترتیب فصل‌ها همان ترتیب کتاب «برنامه و راهنمای ایمن‌سازی ۱۴۰۳» است و شمارهٔ جدول‌ها "
+           "(۱ تا ۲۴) هم عینا از خود کتاب آمده؛ هر جا شک کردی، با همین شماره سراغ اصل منبع برو. "
+           "علامت ٭ کنار بعضی خانه‌های جدول یعنی توضیحش را زیر همان جدول نوشته‌ایم. "
+           "آخر هر فصل هم یک «جمع‌بندی» و یک «مرور سریع» گذاشته‌ایم برای دورهٔ آخر شب — ولی این‌ها "
+           "جای متن را نمی‌گیرند؛ هر مبحث را اول یک‌بار کامل بخوان، بعد با کادرها و مرورها جلو بیا.",
            "پیش از شروع")
 
     # ---------- فصل‌ها ----------
