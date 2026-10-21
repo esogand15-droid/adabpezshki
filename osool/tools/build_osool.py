@@ -552,7 +552,7 @@ def build():
         pdf.cell(pdf.epw, 8, "•  " + line, align="C", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
 
     pdf.ln(5)
-    stats = [("۸", "فصل + ۲ پیوست"), ("۲۴", "جدول منبع"), ("۱۰۶", "صفحهٔ منبع")]
+    stats = [("۱۰", "فصل + مرور سریع"), ("۳۵", "جدول خلاصه‌شده"), ("۶۷", "صفحهٔ شب‌امتحانی")]
     sw, gap = 40, 8
     x0 = (pdf.w - 3 * sw - 2 * gap) / 2
     y0 = pdf.get_y()
